@@ -91,7 +91,6 @@ signButton.addEventListener("click", changeSign);
 
 function printNumber (e) {
     
-
     // Clean the display when we need it (if clanDisplay = 0)
     if (!cleanDisplay) {
         display.value = "";
@@ -164,8 +163,11 @@ function printPeriod () {
     // Disable the period button after clicking an operator button
     if (operator !== "" && !cleanDisplay) return;
 
-    // Add 0 + . if the display is empty
-    if(display.value === "") display.value = "0" + periodButton.textContent;
+    // Add 0 + . if the display is empty or 0
+    if(display.value === "" || display.value === "0") {
+        display.value = "0" + periodButton.textContent;
+        cleanDisplay = 1;
+    }
 
     // Disable the period button if it's already present in the display
     if(display.value.includes(periodButton.textContent)) return;
