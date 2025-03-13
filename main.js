@@ -52,6 +52,9 @@ let displayDigits = "0";
 // Store decimal places in the display
 let decimalPlaces = "";
 
+// Capture when calculateButton is clicked
+let calculateButtonClick = false;
+
 // Node variables for buttons
 
 const calculator = document.querySelector(".calculator");
@@ -163,6 +166,9 @@ function printPeriod () {
     // Disable the period button after clicking an operator button
     if (operator !== "" && !cleanDisplay) return;
 
+    // Clean the display when you click the period button after clicking the calculate button
+    if (calculateButtonClick) display.value = "";
+
     // Add 0 + . if the display is empty or 0
     if(display.value === "" || display.value === "0") {
         display.value = "0" + periodButton.textContent;
@@ -171,6 +177,8 @@ function printPeriod () {
 
     // Disable the period button if it's already present in the display
     if(display.value.includes(periodButton.textContent)) return;
+
+
 
     // Add a period to the display
     display.value += periodButton.textContent;
@@ -201,6 +209,8 @@ function calculate() {
     num2 = 0;
     // Remove the active operator button
     document.querySelector(".active").classList.remove("active");
+    // Store the calculate button as clicked (Im using this to clear the display when I click the period button after clicking the calculate button)
+    calculateButtonClick = true;
 }
 
 function erase () {
